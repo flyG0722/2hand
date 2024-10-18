@@ -1,32 +1,73 @@
+/* 重置样式 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
-    font-size: 14px;
-}
-a {
-    text-decoration: none;
+    font-family: 'Arial', sans-serif; /* 更改字体 */
+    font-size: 16px; /* 增加字体大小 */
+    line-height: 1.5; /* 增加行高 */
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec); /* 渐变背景 */
 }
 
+/* 链接样式 */
+a {
+    text-decoration: none;
+    color: #007bff; /* 蓝色链接 */
+    transition: color 0.3s ease; /* 添加过渡效果 */
+}
+
+a:hover {
+    color: #0056b3; /* 悬停时颜色变化 */
+}
+
+/* 卡片样式 */
 .card {
     padding: 20px;
     background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* 增加圆角 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 更强的阴影 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
 }
 
+.card:hover {
+    transform: translateY(-5px); /* 悬停时向上浮动 */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* 悬停时阴影加深 */
+}
+
+/* 一行文本样式 */
 .line1 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: bold; /* 加粗 */
+    color: #333; /* 深色文本 */
 }
+
+/* 两行文本样式 */
 .line2 {
-    word-break: break-all;
+    word-break: break-word; /* 更改为 break-word，适应不同长文本 */
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* 超出几行省略 */
+    -webkit-line-clamp: 2; 
     overflow: hidden;
+    color: #555; /* 稍浅的文本颜色 */
+}
+
+/* 增加按钮样式 */
+.button {
+    padding: 10px 20px;
+    background-color: #007bff; /* 按钮背景色 */
+    color: #fff; /* 按钮文字颜色 */
+    border: none;
+    border-radius: 5px; /* 圆角 */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
+}
+
+.button:hover {
+    background-color: #0056b3; /* 悬停时背景色变化 */
 }
