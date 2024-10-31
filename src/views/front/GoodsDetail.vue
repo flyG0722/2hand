@@ -44,7 +44,7 @@
         <Comment :fid="id" module="goods" />
       </div>
 
-      <el-dialog title="选择收货地址" :visible.sync="fromVisible" width="30%" :close-on-click-modal="false" destroy-on-close>
+      <el-dialog title="选择收货地址" :visible.sync="fromVisible" width="30%" :close-on-click-modal="false" :modal="false" :append-to-body="true" destroy-on-close>
         <div style="padding: 0 20px">
           <el-radio-group v-model="form.addressId">
             <el-radio v-for="item in addressList" :key="item.id" :label="item.id" style="margin-bottom: 10px">

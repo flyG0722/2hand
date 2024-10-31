@@ -44,10 +44,7 @@
         </el-pagination>
       </div>
     </div>
-    <el-dialog title="求购信息" :visible.sync="formVisible" width="40%" :close-on-click-modal="false" 
-      :modal="false" 
-      :append-to-body="true" 
-      destroy-on-close>
+    <el-dialog title="求购信息" :visible.sync="formVisible" width="40%" :close-on-click-modal="false" :modal="false" :append-to-body="true" destroy-on-close>
       <el-form :model="form" label-width="100px" ref="formRef" :rules="rules">
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="标题"></el-input>

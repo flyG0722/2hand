@@ -35,17 +35,36 @@
               <span class="username">{{ user.name }}</span>
               <i class="el-icon-arrow-down"></i>
             </div>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click="$router.push('/front/orders')">我的订单</el-dropdown-item>
-              <el-dropdown-item @click="$router.push('/front/goods')">我的商品</el-dropdown-item>
-              <el-dropdown-item @click="$router.push('/front/userPosts')">我的发帖</el-dropdown-item>
-              <el-dropdown-item @click="$router.push('/front/userHelp')">我的求购</el-dropdown-item>
-              <el-dropdown-item @click="$router.push('/front/userFeedback')">我的反馈</el-dropdown-item>
-              <el-dropdown-item @click="$router.push('/front/address')">我的地址</el-dropdown-item>
-              <el-dropdown-item @click="$router.push('/front/person')">个人信息</el-dropdown-item>
-              <el-dropdown-item @click="$router.push('/front/collect')">我的收藏</el-dropdown-item>
-              <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+            <el-dropdown-menu>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/orders')">我的订单</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/goods')">我的商品</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/userPosts')">我的发帖</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/userHelp')">我的求购</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/userFeedback')">我的反馈</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/address')">我的地址</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/person')">个人信息</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="$router.push('/front/collect')">我的收藏</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div @click="logout">退出登录</div>
+              </el-dropdown-item>
             </el-dropdown-menu>
+
           </el-dropdown>
         </div>
       </div>
@@ -78,6 +97,11 @@ export default {
     };
   },
   methods: {
+    handleItemClick(path, event) {
+      event.stopPropagation(); // 阻止事件传播
+      console.log('Navigating to:', path); // 确认是否触发
+      this.$router.push(path);
+    },
     updateUser() {
       this.user = JSON.parse(localStorage.getItem('xm-user') || '{}'); // 重新获取用户信息
     },
@@ -93,10 +117,11 @@ export default {
 @import "@/assets/css/front.css";
 
 .container {
-  background: linear-gradient(135deg, #2c3e50, #bdc3c7);
+  background: linear-gradient(184deg, #7d7e77, #c3ffe4);
+
   animation: backgroundAnimation 15s ease infinite;
   min-height: 100vh;
-  color: #ffffff;
+  color: #0a0a0a;
   display: flex;
   flex-direction: column;
   position: relative;

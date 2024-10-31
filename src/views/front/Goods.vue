@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <el-dialog title="内容" :visible.sync="fromVisible1" width="60%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="内容" :visible.sync="fromVisible1" width="60%" :close-on-click-modal="false" :modal="false" :append-to-body="true" destroy-on-close>
       <div v-html="content"></div>
     </el-dialog>
 

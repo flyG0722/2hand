@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <el-dialog title="帖子" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="帖子" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" :modal="false" :append-to-body="true" destroy-on-close>
       <el-form :model="form" label-width="100px" style="padding-right: 50px" :rules="rules" ref="formRef">
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="标题"></el-input>
@@ -93,7 +93,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="文章内容" :visible.sync="fromVisible1" width="50%" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="文章内容" :visible.sync="fromVisible1" width="50%" :close-on-click-modal="false" :modal="false" :append-to-body="true" destroy-on-close>
       <div class="w-e-text">
         <div v-html="content"></div>
       </div>
