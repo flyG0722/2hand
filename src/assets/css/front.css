@@ -38,7 +38,7 @@
 
 .front-header-left .title {
     flex: 1;
-    color: #fff;
+    color: #000000;
     cursor: pointer;
     margin-left: 10px;
     font-size: 22px; /* 增加字体大小 */

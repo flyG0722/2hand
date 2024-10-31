@@ -1,34 +1,41 @@
 <template>
-  <div style="background-color: #f8f8f8; min-height: 100vh">
-    <!--头部-->
-    <div class="front-header">
-      <a href="/front/home">
-        <div class="front-header-left">
-          <img src="@/assets/imgs/logo.png" alt="">
-          <div class="title">二手交易网</div>
-        </div>
+  <div class="container">
+    <!-- 头部 -->
+    <header class="header">
+      <a href="/front/home" class="logo">
+        <img src="@/assets/imgs/logo.png" alt="Logo" />
+        <div class="title">二手交易网</div>
       </a>
-      <div class="front-header-center">
-        <div @click="$router.push(item.path)" class="menu" v-for="item in menus" :key="item.path"
-             :class="{'menu-active' : item.path === $route.path }">{{ item.text }}</div>
-      </div>
-      <div>
-        <span @click="$router.push('/front/chat')" style="font-size: 16px; color: white; cursor: pointer"><i class="el-icon-chat-dot-round"></i> 聊天消息</span>
-      </div>
-      <div class="front-header-right">
+      <nav class="navigation">
+        <div 
+          class="menu" 
+          v-for="item in menus" 
+          :key="item.path" 
+          @click="$router.push(item.path)" 
+          :class="{'menu-active': item.path === $route.path}"
+        >
+          {{ item.text }}
+        </div>
+      </nav>
+      <div class="header-right">
+        <span 
+          @click="$router.push('/front/chat')" 
+          class="chat-icon"
+        >
+          <i class="el-icon-chat-dot-round"></i> 聊天消息
+        </span>
         <div v-if="!user.username">
-          <el-button @click="$router.push('/login')">登录</el-button>
-          <el-button @click="$router.push('/register')">注册</el-button>
+          <el-button class="auth-button" @click="$router.push('/login')">登录</el-button>
+          <el-button class="auth-button" @click="$router.push('/register')">注册</el-button>
         </div>
         <div v-else>
           <el-dropdown>
-            <div class="front-header-dropdown">
-              <img :src="user.avatar" alt="" style="border-radius: 50%">
-              <div style="margin-left: 10px; color: #eee; cursor: pointer">
-                <span>{{ user.name }}</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
-              </div>
+            <div class="user-dropdown">
+              <img :src="user.avatar" alt="" class="avatar" />
+              <span class="username">{{ user.name }}</span>
+              <i class="el-icon-arrow-down"></i>
             </div>
-            <el-dropdown-menu slot="dropdown">
+            <el-dropdown-menu>
               <el-dropdown-item>
                 <div @click="$router.push('/front/orders')">我的订单</div>
               </el-dropdown-item>
@@ -54,20 +61,19 @@
                 <div @click="$router.push('/front/collect')">我的收藏</div>
               </el-dropdown-item>
               <el-dropdown-item>
-                <div style="text-decoration: none" @click="logout">退出登录</div>
+                <div @click="logout">退出登录</div>
               </el-dropdown-item>
             </el-dropdown-menu>
+
           </el-dropdown>
         </div>
       </div>
-    </div>
-    <!--主体-->
-    <div class="main-body">
+    </header>
+    <!-- 主体 -->
+    <main class="main-body">
       <router-view ref="child" @update:user="updateUser" />
-    </div>
-
+    </main>
     <Footer />
-
   </div>
 </template>
 
@@ -78,9 +84,8 @@ export default {
   components: {
     Footer
   },
-  data () {
+  data() {
     return {
-      notice: [],
       user: JSON.parse(localStorage.getItem("xm-user") || '{}'),
       menus: [
         { text: '热卖专区', path: '/front/home' },
@@ -89,39 +94,149 @@ export default {
         { text: '系统公告', path: '/front/notice' },
         { text: '留言反馈', path: '/front/feedback' },
       ]
-    }
-  },
-
-  mounted() {
-
+    };
   },
   methods: {
-    updateUser() {
-      this.user = JSON.parse(localStorage.getItem('xm-user') || '{}')   // 重新获取下用户的最新信息
+    handleItemClick(path, event) {
+      event.stopPropagation(); // 阻止事件传播
+      console.log('Navigating to:', path); // 确认是否触发
+      this.$router.push(path);
     },
-    // 退出登录
+    updateUser() {
+      this.user = JSON.parse(localStorage.getItem('xm-user') || '{}'); // 重新获取用户信息
+    },
     logout() {
       localStorage.removeItem("xm-user");
       this.$router.push("/login");
     },
   }
-
 }
 </script>
 
 <style scoped>
-  @import "@/assets/css/front.css";
+@import "@/assets/css/front.css";
 
-  .menu {
-    color: #eee;
-    font-size: 16px;
-    padding: 0 20px;
-    cursor: pointer;
-  }
-  .menu:hover {
-    color: orange;
-  }
-  .menu-active {
-    color: orange;
-  }
+.container {
+  background: linear-gradient(184deg, #7d7e77, #c3ffe4);
+
+  animation: backgroundAnimation 15s ease infinite;
+  min-height: 100vh;
+  color: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes backgroundAnimation {
+  0% { background-color: #2c3e50; }
+  50% { background-color: #34495e; }
+  100% { background-color: #2c3e50; }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.header:hover {
+  transform: translateY(-2px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo img {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navigation {
+  display: flex;
+}
+
+.menu {
+  color: #eee;
+  font-size: 18px;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.menu:hover {
+  color: #ffa500;
+  transform: scale(1.1);
+}
+
+.menu-active {
+  color: #ffa500;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.chat-icon {
+  font-size: 16px;
+  margin-right: 20px;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.chat-icon:hover {
+  color: #ffa500;
+}
+
+.auth-button {
+  margin-left: 10px;
+  background-color: #ffa500;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+  background-color: #ff8c00;
+}
+
+.user-dropdown {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+}
+
+.username {
+  color: #eee;
+}
+
+.main-body {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: rgba(44, 62, 80, 0.9);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
 </style>
